@@ -4,6 +4,21 @@
 const Model = use('Model')
 
 class ClienteConvenioFuncionario extends Model {
+  static get table() {
+    return 'fdw_pg15.stfil002'
+  }
+
+  static get createdAtColumn() {
+    return null
+  }
+
+  static get updatedAtColumn() {
+    return null
+  }
+
+  empresa() {
+    return this.hasOne('App/Models/EmpresaConvenio', 'funcodemp', 'empcodemp')
+  }
 }
 
 module.exports = ClienteConvenioFuncionario

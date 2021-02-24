@@ -17,11 +17,11 @@ class Cliente extends Model {
   }
 
   convenios_funcionario() {
-    return this.hasMany('/App/Models/ClienteConvenioFuncionario', 'ai', 'ai')
+    return this.hasMany('App/Models/ClienteConvenioFuncionario', 'id_convenio', 'ai')
   }
 
   // convenios() {
-  //   return this.hasMany('/App/Models/ClienteConvenioEspecial')
+  //   return this.hasMany('App/Models/ClienteConvenioEspecial')
   // }
 
   static get computed() {

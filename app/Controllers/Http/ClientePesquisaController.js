@@ -1,5 +1,7 @@
 'use strict'
 
+const list_clientes_pesquisa = require('../../View/list_clientes_pesquisa')
+
 const Cliente = use('App/Models/Cliente')
 const ClienteConvenioFuncionario = use('App/Models/ClienteConvenioFuncionario')
 
@@ -26,12 +28,14 @@ class ClientePesquisaController {
     if (!isNaN(termo)) {
       const clientesCPF = await Cliente
         .query()
-        .with('convenios_funcionario')
+        .with('convenios_funcionario.empresa')
         .where('cpf', termo)
         .fetch()
 
-      if (clientesCPF.toJSON().length > 0) {
-        return { tipoPesquisa: 'CPF', clientes: clientesCPF }
+      const clientesCPF_ = clientesCPF.toJSON()
+      if (clientesCPF_.length > 0) {
+        const clientes = list_clientes_pesquisa.renderMany(clientesCPF_, 'CPF')
+        return { tipoPesquisa: 'CPF', clientes }
       }
 
       const funcodempPosicao = [2, 5]
@@ -60,9 +64,13 @@ class ClientePesquisaController {
 
     const clientesNome = await Cliente
       .query()
-      //.with('convenios_funcionario')
+      .with('convenios_funcionario')
       .where('nome', 'ilike', `%${termo}%`)
       .fetch()
+
+    if (!(clientesNome.toJSON().length > 0)) {
+      return response.status(400).send({ message: 'Nenhum registro encontrado' })
+    }
 
     return { tipoPesquisa: 'Nome', clientes: clientesNome }
   }
