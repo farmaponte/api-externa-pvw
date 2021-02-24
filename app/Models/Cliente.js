@@ -20,16 +20,8 @@ class Cliente extends Model {
     return this.hasMany('App/Models/ClienteConvenioFuncionario', 'id_convenio', 'ai')
   }
 
-  // convenios() {
-  //   return this.hasMany('App/Models/ClienteConvenioEspecial')
-  // }
-
-  static get computed() {
-    return ['tipo_fidelidade']
-  }
-
-  getTipoFidelidade({ id_convenio }) {
-    return id_convenio ? 'FIDELIDADE + CONVÊNIO' : 'FIDELIDADE'
+  convenios() {
+    return this.hasMany('App/Models/ClienteConvenio')
   }
 }
 

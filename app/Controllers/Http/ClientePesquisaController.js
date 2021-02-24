@@ -56,23 +56,27 @@ class ClientePesquisaController {
           .andWhere('funcodint', '=', funcodint)
           .fetch()
 
-        if (clienteConvenioFuncionario.toJSON().length > 0) {
-          return { tipoPesquisa: 'Convênio', clientes: clienteConvenioFuncionario }
+        const clienteConvenioFuncionario_ = clienteConvenioFuncionario.toJSON()
+        if (clienteConvenioFuncionario_.length > 0) {
+          const clientes = list_clientes_pesquisa.renderMany(clienteConvenioFuncionario_, 'Convenio') //TO-DO
+          return { tipoPesquisa: 'Convênio', clientes: clientes }
         }
       }
     }
 
     const clientesNome = await Cliente
       .query()
-      .with('convenios_funcionario')
+      .with('convenios_funcionario.empresa')
       .where('nome', 'ilike', `%${termo}%`)
       .fetch()
 
-    if (!(clientesNome.toJSON().length > 0)) {
+    const clientesNome_ = clientesNome.toJSON()
+    if (!(clientesNome_.length > 0)) {
       return response.status(400).send({ message: 'Nenhum registro encontrado' })
     }
 
-    return { tipoPesquisa: 'Nome', clientes: clientesNome }
+    const clientes = list_clientes_pesquisa.renderMany(clientesNome_, 'Nome')
+    return { tipoPesquisa: 'Nome', clientes: clientes }
   }
 
   /**
