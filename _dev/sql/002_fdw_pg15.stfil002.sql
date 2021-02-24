@@ -1,0 +1,68 @@
+CREATE SCHEMA fdw_pg15 AUTHORIZATION postgres;
+
+ALTER SCHEMA fdw_pg15
+  OWNER TO postgres;
+ 
+CREATE TABLE fdw_pg15.stfil002 (
+   "ai" INTEGER,
+   "controle" INTEGER,
+   "funcodemp" INTEGER,
+   "fundigfun" INTEGER,
+   "funnomfun" TEXT,
+   "funflacar" BOOLEAN,
+   "funflager" BOOLEAN,
+   "funfladem" TEXT,
+   "fundatdem" DATE,
+   "fundiapag" INTEGER,
+   "funcatsal" TEXT,
+   "fundatinc" DATE,
+   "funflaicp" BOOLEAN,
+   "funflapvc" BOOLEAN,
+   "funnascfun" DATE,
+   "funcivfun" INTEGER,
+   "funsexfun" INTEGER,
+   "funrgfun" TEXT,
+   "funexpfun" TEXT,
+   "funmedfun" TEXT,
+   "funoutmed" TEXT,
+   "funcencus" TEXT,
+   "fundatalt" DATE,
+   "funcodusu" INTEGER,
+   "funprofun" INTEGER,
+   "funescfun" INTEGER,
+   "funissfun" TEXT,
+   "funendfun" TEXT,
+   "funbaifun" TEXT,
+   "funcidfun" TEXT,
+   "funuffun" TEXT,
+   "funtelfun" TEXT,
+   "funcepfun" TEXT,
+   "funemlfun" TEXT,
+   "funcodpar" INTEGER,
+   "funsetfun" TEXT,
+   "id_setor" INTEGER,
+   "auditoriaid" BIGINT,
+   "auditoriadatahora" TIMESTAMP,
+   "id_titular" INTEGER,
+   "saldo_centralizado" BOOLEAN,
+   "funemscar" DATE,
+   "funcartit" INTEGER,
+   "funvallcd" DOUBLE PRECISION,
+   "funsallcd" DOUBLE PRECISION,
+   "funcodfep" INTEGER,
+   "funcodint" INTEGER,
+   "funcodant" INTEGER,
+   "funcpffun" BIGINT,
+   "funcodfun" INTEGER,
+   "funcodfun_" BIGINT,
+   "id" INTEGER,
+   "funtipcar" INTEGER,
+   "funcomplemento" TEXT,
+   "senha" TEXT,
+   "email" TEXT
+);
+
+INSERT INTO fdw_pg15.stfil002 ("ai", "controle", "funcodemp", "fundigfun", "funnomfun", "funflacar", "funflager", "funfladem", "fundatdem", "fundiapag", "funcatsal", "fundatinc", "funflaicp", "funflapvc", "funnascfun", "funcivfun", "funsexfun", "funrgfun", "funexpfun", "funmedfun", "funoutmed", "funcencus", "fundatalt", "funcodusu", "funprofun", "funescfun", "funissfun", "funendfun", "funbaifun", "funcidfun", "funuffun", "funtelfun", "funcepfun", "funemlfun", "funcodpar", "funsetfun", "id_setor", "auditoriaid", "auditoriadatahora", "id_titular", "saldo_centralizado", "funemscar", "funcartit", "funvallcd", "funsallcd", "funcodfep", "funcodint", "funcodant", "funcpffun", "funcodfun", "funcodfun_", "id", "funtipcar", "funcomplemento", "senha", "email")
+VALUES
+  (509831, NULL, 2373, NULL, E'CELSO ALEXANDRE PALMA JUNIOR ', NULL, NULL, E'E', E'2020-06-26', NULL, NULL, E'2020-06-26', NULL, False, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, E'2020-06-26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, E'15 9997744', NULL, NULL, NULL, NULL, 0, 4806, E'2020-06-26 13:12:40', 0, True, NULL, NULL, 100, 100, NULL, 5161210, NULL, 41024274810, 17831, NULL, 507964, NULL, NULL, NULL, NULL),
+  (509832, NULL, 3231, NULL, E'CELSO ALEXANDRE PALMA JUNIOR', NULL, NULL, E'Z', E'2020-06-29', NULL, NULL, E'2020-06-26', NULL, True, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, E'2020-06-29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 4367, E'2020-10-26 11:32:54', 0, True, E'2020-06-29', NULL, 487.37, 487.37, NULL, 5161220, NULL, 41024274810, 17831, NULL, 507965, NULL, NULL, NULL, E'celsoalexandre@live.com');
