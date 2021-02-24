@@ -1,5 +1,7 @@
 Através do botão abaixo é possível importar o workspace do Insomnia:   
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=APIExternaPVW&uri=https%3A%2F%2Fraw.githubusercontent.com%2Ffarmaponte%2Fapi-externa-pvw%2Fmaster%2F_dev%2Finsomnia.json)
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=APIExternaPVW&uri=https%3A%2F%2Fraw.githubusercontent.com%2Ffarmaponte%2Fapi-externa-pvw%2Fmaster%2F_dev%2Finsomnia.json)  
+O arquivo também pode ser baixado em _dev/insomnia.json e importado no Insomnia ou Postman
+
 
 # Adonis API application
 
