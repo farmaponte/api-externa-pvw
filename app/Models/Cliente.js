@@ -21,7 +21,7 @@ class Cliente extends Model {
   }
 
   convenios() {
-    return this.hasMany('App/Models/ClienteConvenio')
+    return this.hasMany('App/Models/ClienteConvenio', 'id', 'tb_clientes_id')
   }
 }
 

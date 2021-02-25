@@ -9,8 +9,6 @@ function view_cliente_fidelidade(cliente) {
     convenios_funcionario,
   } = cliente
 
-  const { empresa } = convenios_funcionario[0]
-
   const clienteView = {
     id,
     nome,
@@ -20,7 +18,7 @@ function view_cliente_fidelidade(cliente) {
     id_convenio,
     convenio_cartao,
     tipo_cadastro: (id_convenio ? 'FIDELIDADE + CONVÊNIO' : 'FIDELIDADE'),
-    convenio_funcionario_principal: (
+    convenio_principal_funcionario: (
       convenios_funcionario?.filter(conven => conven.ai === id_convenio)
         .map(conven => {
           return {
@@ -65,9 +63,27 @@ function view_cliente_fidelidade(cliente) {
   return clienteView
 }
 
+function view_convenio_funcionario(convenioFuncionario) {
+  let { cliente, empresa, ...convenio_funcionario_ } = convenioFuncionario
+
+  cliente = (cliente || {})
+  cliente.nome = (cliente?.nome || convenioFuncionario.funnomfun)
+  cliente.cpf = (cliente?.cpf || convenioFuncionario.funcpffun)
+  cliente.id_convenio = (cliente?.id_convenio || convenioFuncionario.ai)
+
+  cliente.convenios_funcionario = [convenio_funcionario_]
+  cliente.convenios_funcionario[0].empresa = empresa
+
+  const retorno = view_cliente_fidelidade(cliente)
+
+  retorno.tipo_cadastro = (cliente?.id ? 'FIDELIDADE + CONVÊNIO' : 'CONVÊNIO')
+
+  return retorno
+}
+
 module.exports = {
-  render(cliente, tipoPesquisa) {
-    if (!cliente || !tipoPesquisa) {
+  render(cliente, tipoPesquisa, debug = false) {
+    if (debug || !cliente || !tipoPesquisa) {
       return cliente
     }
 
@@ -82,16 +98,18 @@ module.exports = {
           retorno = view_cliente_fidelidade(cliente)
           return retorno
         case 'Convenio':
-        //view_convenio_funcionado
+        //view_convenio
         case 'Convenio Funcionario':
-        //view_convenio_funcionado
+          retorno = view_convenio_funcionario(cliente)
+          return retorno
 
         default:
-          console.log('teste0')
+          console.log('default')
           return cliente
       }
     } catch (err) {
-      console.log('teste')
+      console.log('erro list_clientes_pesquisa')
+      console.log(err.message)
       return cliente
     }
   },

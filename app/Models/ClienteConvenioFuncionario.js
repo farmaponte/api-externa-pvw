@@ -19,6 +19,10 @@ class ClienteConvenioFuncionario extends Model {
   empresa() {
     return this.hasOne('App/Models/EmpresaConvenio', 'funcodemp', 'empcodemp')
   }
+
+  cliente() {
+    return this.hasOne('App/Models/Cliente', 'ai', 'id_convenio')
+  }
 }
 
 module.exports = ClienteConvenioFuncionario

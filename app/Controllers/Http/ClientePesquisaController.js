@@ -1,5 +1,6 @@
 'use strict'
 
+const ClienteConvenio = use('App/Models/ClienteConvenio')
 const list_clientes_pesquisa = require('../../View/list_clientes_pesquisa')
 
 const Cliente = use('App/Models/Cliente')
@@ -33,7 +34,7 @@ class ClientePesquisaController {
         .fetch()
 
       const clientesCPF_ = clientesCPF.toJSON()
-      if (clientesCPF_.length > 0) {
+      if (clientesCPF_?.length > 0) {
         const clientes = list_clientes_pesquisa.renderMany(clientesCPF_, 'CPF')
         return { tipoPesquisa: 'CPF', clientes }
       }
@@ -52,14 +53,28 @@ class ClientePesquisaController {
       if (!isNaN(funcodint) && !isNaN(funcodemp)) {
         const clienteConvenioFuncionario = await ClienteConvenioFuncionario
           .query()
+          .with('empresa')
+          .with('cliente')
           .where('funcodemp', '=', funcodemp)
           .andWhere('funcodint', '=', funcodint)
           .fetch()
 
         const clienteConvenioFuncionario_ = clienteConvenioFuncionario.toJSON()
-        if (clienteConvenioFuncionario_.length > 0) {
+        if (clienteConvenioFuncionario_?.length > 0) {
           const clientes = list_clientes_pesquisa.renderMany(clienteConvenioFuncionario_, 'Convenio') //TO-DO
           return { tipoPesquisa: 'Convênio', clientes: clientes }
+        }
+
+        const clienteConvenio = await ClienteConvenio
+          .query()
+          .where('cartao', termo)
+          .fetch()
+
+        const clienteConvenio_ = clienteConvenio.toJSON()
+
+        if (clienteConvenio_[0]?.length > 0) {
+          const clientes = list_clientes_pesquisa.renderMany(clienteConvenioFuncionario_, 'Convenio') //TO-DO
+          return { tipoPesquisa: 'Convênio X', clientes: clientes }
         }
       }
     }
@@ -71,7 +86,7 @@ class ClientePesquisaController {
       .fetch()
 
     const clientesNome_ = clientesNome.toJSON()
-    if (!(clientesNome_.length > 0)) {
+    if (clientesNome_.length === 0) {
       return response.status(400).send({ message: 'Nenhum registro encontrado' })
     }
 
